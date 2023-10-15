@@ -30,7 +30,7 @@ Deno.test("form: non-admin query for actionable records", async () => {
     assertExists(!data[505]); // tester is not the requestor
 });
 
-Deno.test("form: admin edit record datafield", async () => {
+Deno.test("form: edit record datafield", async () => {
     let formData = new FormData();
     formData.append('CSRFToken', CSRFToken);
     formData.append('3', '12345');
