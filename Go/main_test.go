@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/tls"
 	"io"
+	"log"
 	"net/http"
 	"net/http/cookiejar"
 	"os"
@@ -31,9 +32,15 @@ func TestMain(m *testing.M) {
 
 	req, _ := http.NewRequest("GET", rootURL, nil)
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.2088.46")
-	res, _ := client.Do(req)
+	res, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	bodyBytes, _ := io.ReadAll(res.Body)
+	bodyBytes, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 	body := string(bodyBytes)
 
 	startIdx := strings.Index(body, "var CSRFToken = '") + 17

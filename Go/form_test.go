@@ -29,6 +29,10 @@ func TestForm_HomepageQuery(t *testing.T) {
 func TestForm_NonadminQueryActionable(t *testing.T) {
 	got := getJson(rootURL + `api/form/query?q={"terms":[{"id":"stepID","operator":"=","match":"actionable","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service"],"sort":{},"limit":1000,"limitOffset":0}&x-filterData=recordID,title&masquerade=nonAdmin`)
 
+	if !gjson.Valid(got) {
+		t.Errorf("Invalid JSON. got = %v, want = valid json", got)
+	}
+
 	if !gjson.Get(got, "503").Exists() {
 		t.Errorf("Should be readable because tester is backup of person designated")
 	}
