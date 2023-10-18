@@ -12,7 +12,7 @@ Prerequisite:
 go install golang.org/x/perf/cmd/benchstat
 ```
 
-Store reesults:
+Store results:
 ```
 go test -run="^$" -bench=. -count=10 > sprint61.txt
 ```
