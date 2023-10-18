@@ -2,6 +2,5 @@
 ### Run tests
 go test
 
-
-### Optional verbose mode
-go test -v
+### Run benchmarks
+go test -bench=. -count=3
