@@ -3,4 +3,4 @@
 go test
 
 ### Run benchmarks
-go test -bench=. -count=3
+go test -run="^$" -bench=. -count=3
