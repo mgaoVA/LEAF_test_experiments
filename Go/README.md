@@ -1,3 +1,13 @@
+# LEAF API Testing
+
+This test suite should exercise access rules, data accuracy, and measure performance within hotpaths for the LEAF API.
+
+This leverages an existing [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
+
+TODO:
+1. Setup and configuration of the Test DB needs to be automated
+1. Need a more streamlined way to visualize results from benchmarks between different releases
+
 # Docker Environment
 
 ## Prerequisites

@@ -34,15 +34,15 @@ func TestForm_NonadminQueryActionable(t *testing.T) {
 	}
 
 	if !gjson.Get(got, "503").Exists() {
-		t.Errorf("Should be readable because tester is backup of person designated")
+		t.Errorf("Record 504 should be readable because tester is backup of person designated")
 	}
 
 	if !gjson.Get(got, "504").Exists() {
-		t.Errorf("Should be readable because tester is backup of initiator")
+		t.Errorf("Record 504 should be readable because tester is backup of initiator")
 	}
 
 	if gjson.Get(got, "505").Exists() {
-		t.Errorf("Should not be readable because tester is not the requestor")
+		t.Errorf("Record 505 should not be readable because tester is not the requestor")
 	}
 }
 

@@ -25,9 +25,9 @@ Deno.test("form: non-admin query for actionable records", async () => {
     let res = await fetch(rootURL + `api/form/query?q={"terms":[{"id":"stepID","operator":"=","match":"actionable","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service"],"sort":{},"limit":1000,"limitOffset":0}&x-filterData=recordID,title&masquerade=nonAdmin`);
     let data = await res.json()
 
-    assertExists(data[503], `Should be readable because tester is backup of person designated`);
-    assertExists(data[504], `Should be readable because tester is backup of initiator`);
-    assertExists(!data[505], `Should not be readable because tester is not the requestor`);
+    assertExists(data[503], `Record 503 should be readable because tester is backup of person designated`);
+    assertExists(data[504], `Record 504 should be readable because tester is backup of initiator`);
+    assertExists(!data[505], `Record 505 should not be readable because tester is not the requestor`);
 });
 
 Deno.test("form: admin edit record datafield", async () => {
