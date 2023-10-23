@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+    api-test-deno:
+        image: denoland/deno
+        volumes:
+          - "../:/app/"
+        network_mode: "host"
+        command: deno test --allow-net --unsafely-ignore-certificate-errors

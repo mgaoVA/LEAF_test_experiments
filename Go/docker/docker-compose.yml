@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+    api-test-go:
+        image: golang
+        volumes:
+          - "../:/app"
+        working_dir: /app
+        network_mode: "host"
+        entrypoint: go test
