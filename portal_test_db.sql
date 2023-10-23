@@ -587,7 +587,17 @@ INSERT INTO `action_history` (`actionID`, `recordID`, `userID`, `stepID`, `depen
 (537,	508,	'tester',	0,	5,	'submit',	6,	1697229406,	''),
 (538,	508,	'tester',	0,	0,	'move',	8,	1697229418,	'Moved to Followup step'),
 (539,	507,	'tester',	0,	0,	'move',	8,	1697232435,	'Moved to Requestor Followup step'),
-(540,	505,	'tester',	0,	0,	'changeInitiator',	8,	1697325024,	'Initiator changed to Agueda Howell');
+(540,	505,	'tester',	0,	0,	'changeInitiator',	8,	1697325024,	'Initiator changed to Agueda Howell'),
+(541,	508,	'tester',	0,	0,	'move',	8,	1697553943,	'Moved to Followup step'),
+(542,	508,	'tester',	5,	-2,	'sendback',	8,	1697553997,	''),
+(543,	508,	'tester',	0,	5,	'submit',	6,	1697554015,	''),
+(544,	508,	'tester',	0,	0,	'move',	8,	1697554039,	'Moved to Followup step'),
+(545,	508,	'tester',	5,	-2,	'sendback',	8,	1697554097,	''),
+(546,	508,	'tester',	0,	5,	'submit',	6,	1697554108,	''),
+(547,	502,	'tester',	0,	0,	'changeInitiator',	8,	1697554880,	'Initiator changed to Linsey Hackett'),
+(548,	502,	'tester',	0,	0,	'move',	8,	1697554888,	'Moved to Service Chief step'),
+(549,	502,	'tester',	7,	1,	'sendback',	8,	1697554890,	''),
+(550,	502,	'tester',	0,	5,	'submit',	6,	1697554909,	'');
 
 DROP TABLE IF EXISTS `action_types`;
 CREATE TABLE `action_types` (
@@ -646,10 +656,12 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`categoryID`, `parentID`, `categoryName`, `categoryDescription`, `workflowID`, `sort`, `needToKnow`, `formLibraryID`, `visible`, `disabled`, `type`, `destructionAge`, `lastModified`) VALUES
 ('form_2ca98',	'',	'Complex Form',	'',	1,	0,	0,	NULL,	1,	0,	'',	NULL,	1695395465),
+('form_2d609',	'',	'Requestor Followup',	'',	2,	0,	1,	NULL,	1,	0,	'',	NULL,	1697554085),
 ('form_47236',	'',	'Grid',	'',	0,	0,	0,	NULL,	1,	0,	'',	NULL,	1693258372),
 ('form_548f8',	'',	'Sensitive Fields',	'',	0,	0,	1,	NULL,	1,	0,	'',	NULL,	1692287284),
 ('form_5ea07',	'',	'General Form',	'',	1,	0,	1,	NULL,	1,	0,	'',	NULL,	1695339032),
-('form_ce46b',	'',	'Simple form',	'',	1,	0,	0,	NULL,	1,	0,	'',	NULL,	1697229311),
+('form_a9b9f',	'',	'Service Chief',	'',	3,	0,	1,	NULL,	1,	0,	'',	NULL,	1697554796),
+('form_ce46b',	'',	'Simple form',	'',	1,	0,	1,	NULL,	1,	0,	'',	NULL,	1697476029),
 ('leaf_devconsole',	'',	'LEAF Developer Console',	'',	-2,	0,	0,	NULL,	1,	0,	'',	NULL,	0),
 ('leaf_secure',	'',	'Leaf Secure Certification',	'',	-1,	0,	0,	NULL,	1,	0,	'',	NULL,	0);
 
@@ -1166,13 +1178,15 @@ INSERT INTO `category_count` (`recordID`, `categoryID`, `count`) VALUES
 (499,	'form_5ea07',	1),
 (500,	'form_5ea07',	1),
 (501,	'form_5ea07',	1),
-(502,	'form_5ea07',	1),
+(502,	'form_5ea07',	0),
+(502,	'form_a9b9f',	1),
 (503,	'form_5ea07',	1),
 (504,	'form_5ea07',	1),
 (505,	'form_5ea07',	1),
 (506,	'form_5ea07',	1),
 (507,	'form_2ca98',	1),
-(508,	'form_ce46b',	1);
+(508,	'form_2d609',	1),
+(508,	'form_ce46b',	0);
 
 DROP TABLE IF EXISTS `category_privs`;
 CREATE TABLE `category_privs` (
@@ -1207,8 +1221,7 @@ CREATE TABLE `data` (
   UNIQUE KEY `unique` (`recordID`,`indicatorID`,`series`),
   KEY `indicator_series` (`indicatorID`,`series`),
   KEY `fastdata` (`indicatorID`,`data`(10)),
-  FULLTEXT KEY `data` (`data`),
-  CONSTRAINT `fk_records_data_deletion` FOREIGN KEY (`recordID`) REFERENCES `records` (`recordID`) ON DELETE CASCADE
+  FULLTEXT KEY `data` (`data`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `data` (`recordID`, `indicatorID`, `series`, `data`, `timestamp`, `userID`) VALUES
@@ -3716,7 +3729,7 @@ INSERT INTO `data` (`recordID`, `indicatorID`, `series`, `data`, `timestamp`, `u
 (504,	5,	1,	'41465',	1694021485,	'tester'),
 (504,	8,	1,	'300',	1695331226,	'tester'),
 (504,	10,	1,	'60',	1695339088,	'tester'),
-(505,	3,	1,	'12345',	1697418419,	'tester'),
+(505,	3,	1,	'12345',	1698070206,	'tester'),
 (505,	4,	1,	'',	1697328866,	'tester'),
 (505,	5,	1,	'87079',	1697328866,	'tester'),
 (505,	6,	1,	'',	1697328866,	'tester'),
@@ -3881,7 +3894,25 @@ INSERT INTO `data_action_log` (`empUID`, `id`, `action`, `userID`, `timestamp`, 
 (NULL,	143,	'modify-template_body',	1,	'2023-10-14 14:49:38',	'tester tester'),
 (NULL,	144,	'modify-template_body',	1,	'2023-10-14 14:50:12',	'tester tester'),
 (NULL,	145,	'modify-template_body',	1,	'2023-10-14 14:50:23',	'tester tester'),
-(NULL,	146,	'restore-template_body',	1,	'2023-10-14 14:50:29',	'tester tester');
+(NULL,	146,	'restore-template_body',	1,	'2023-10-14 14:50:29',	'tester tester'),
+(NULL,	147,	'modify-form',	1,	'2023-10-16 17:05:38',	'tester tester'),
+(NULL,	148,	'add-indicator',	1,	'2023-10-16 17:07:09',	'tester tester'),
+(NULL,	150,	'add-indicator',	1,	'2023-10-17 14:48:05',	'tester tester'),
+(NULL,	151,	'modify-form',	1,	'2023-10-17 14:48:12',	'tester tester'),
+(NULL,	152,	'modify-form',	1,	'2023-10-17 14:48:12',	'tester tester'),
+(NULL,	154,	'add-indicator',	1,	'2023-10-17 14:59:56',	'tester tester'),
+(NULL,	155,	'add-workflow_step',	1,	'2023-10-17 15:00:05',	'tester tester'),
+(NULL,	156,	'delete-workflow_step',	1,	'2023-10-17 15:00:10',	'tester tester'),
+(NULL,	157,	'add-workflow',	1,	'2023-10-17 15:00:15',	'tester tester'),
+(NULL,	158,	'add-workflow_step',	1,	'2023-10-17 15:00:21',	'tester tester'),
+(NULL,	159,	'add-step_dependency',	1,	'2023-10-17 15:00:34',	'tester tester'),
+(NULL,	160,	'modify-workflow',	1,	'2023-10-17 15:00:36',	'tester tester'),
+(NULL,	161,	'delete-route_events',	1,	'2023-10-17 15:00:36',	'tester tester'),
+(NULL,	162,	'delete-workflow_route',	1,	'2023-10-17 15:00:36',	'tester tester'),
+(NULL,	163,	'add-workflow_route',	1,	'2023-10-17 15:00:38',	'tester tester'),
+(NULL,	164,	'add-workflow_route',	1,	'2023-10-17 15:00:40',	'tester tester'),
+(NULL,	165,	'modify-form',	1,	'2023-10-17 15:01:46',	'tester tester'),
+(NULL,	166,	'modify-form',	1,	'2023-10-17 15:03:57',	'tester tester');
 
 DROP TABLE IF EXISTS `data_cache`;
 CREATE TABLE `data_cache` (
@@ -6835,7 +6866,61 @@ INSERT INTO `data_log_items` (`data_action_log_fk`, `tableName`, `column`, `valu
 (143,	'template_editor',	'body',	'view_homepage.tpl',	'view_homepage.tpl'),
 (144,	'template_editor',	'body',	'view_homepage.tpl',	'view_homepage.tpl'),
 (145,	'template_editor',	'body',	'view_homepage.tpl',	'view_homepage.tpl'),
-(146,	'template_editor',	'body',	'view_homepage.tpl',	'view_homepage.tpl');
+(146,	'template_editor',	'body',	'view_homepage.tpl',	'view_homepage.tpl'),
+(147,	'categories',	'categoryID',	'form_ce46b',	NULL),
+(147,	'categories',	'needToKnow',	'1',	NULL),
+(148,	'indicators',	'categoryID',	'form_ce46b',	NULL),
+(148,	'indicators',	'indicatorID',	'11',	NULL),
+(148,	'indicators',	'is_sensitive',	'0',	NULL),
+(148,	'indicators',	'name',	'single line text',	NULL),
+(150,	'indicators',	'categoryID',	'form_2d609',	NULL),
+(150,	'indicators',	'indicatorID',	'12',	NULL),
+(150,	'indicators',	'is_sensitive',	'0',	NULL),
+(150,	'indicators',	'name',	'Single line text',	NULL),
+(151,	'categories',	'categoryID',	'form_2d609',	NULL),
+(151,	'categories',	'needToKnow',	'1',	NULL),
+(152,	'categories',	'categoryID',	'form_2d609',	NULL),
+(152,	'categories',	'workflowID',	'2',	NULL),
+(154,	'indicators',	'categoryID',	'form_a9b9f',	NULL),
+(154,	'indicators',	'indicatorID',	'13',	NULL),
+(154,	'indicators',	'is_sensitive',	'0',	NULL),
+(154,	'indicators',	'name',	'Single line text',	NULL),
+(155,	'workflow_steps',	'jsSrc',	'',	'empty'),
+(155,	'workflow_steps',	'stepID',	'6',	NULL),
+(155,	'workflow_steps',	'stepTitle',	'Service Chief',	NULL),
+(155,	'workflow_steps',	'workflowID',	'1',	NULL),
+(156,	'workflow_steps',	'stepID',	'6',	NULL),
+(156,	'workflow_steps',	'workflowID',	'1',	NULL),
+(157,	'workflows',	'workflowID',	'3',	NULL),
+(158,	'workflow_steps',	'jsSrc',	'',	'empty'),
+(158,	'workflow_steps',	'stepID',	'7',	NULL),
+(158,	'workflow_steps',	'stepTitle',	'Service Chief',	NULL),
+(158,	'workflow_steps',	'workflowID',	'3',	NULL),
+(159,	'step_dependencies',	'dependencyID',	'1',	NULL),
+(159,	'step_dependencies',	'stepID',	'7',	NULL),
+(160,	'workflows',	'initialStepID',	'7',	NULL),
+(160,	'workflows',	'workflowID',	'3',	NULL),
+(161,	'route_events',	'action',	'submit',	NULL),
+(161,	'route_events',	'stepID',	'-1',	NULL),
+(161,	'route_events',	'workflowID',	'3',	NULL),
+(162,	'workflow_routes',	'actionType',	'submit',	NULL),
+(162,	'workflow_routes',	'nextStepID',	'0',	NULL),
+(162,	'workflow_routes',	'stepID',	'-1',	NULL),
+(162,	'workflow_routes',	'workflowID',	'3',	NULL),
+(163,	'workflow_routes',	'actionType',	'sendback',	NULL),
+(163,	'workflow_routes',	'displayConditional',	'{\"required\":false}',	NULL),
+(163,	'workflow_routes',	'nextStepID',	'0',	NULL),
+(163,	'workflow_routes',	'stepID',	'7',	NULL),
+(163,	'workflow_routes',	'workflowID',	'3',	NULL),
+(164,	'workflow_routes',	'actionType',	'approve',	NULL),
+(164,	'workflow_routes',	'displayConditional',	'',	NULL),
+(164,	'workflow_routes',	'nextStepID',	'0',	NULL),
+(164,	'workflow_routes',	'stepID',	'7',	NULL),
+(164,	'workflow_routes',	'workflowID',	'3',	NULL),
+(165,	'categories',	'categoryID',	'form_a9b9f',	NULL),
+(165,	'categories',	'workflowID',	'3',	NULL),
+(166,	'categories',	'categoryID',	'form_a9b9f',	NULL),
+(166,	'categories',	'needToKnow',	'1',	NULL);
 
 DROP TABLE IF EXISTS `dependencies`;
 CREATE TABLE `dependencies` (
@@ -6924,6 +7009,10 @@ CREATE TABLE `email_tracker` (
   CONSTRAINT `fk_records_email_tracker_deletion` FOREIGN KEY (`recordID`) REFERENCES `records` (`recordID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `email_tracker` (`id`, `recordID`, `userID`, `timestamp`, `recipients`, `subject`) VALUES
+(1,	508,	NULL,	1697553997,	'Recipient(s): Tracy.O\'Hane0@fake-email.com, tester.tester@fake-email.com, Rhona.Goodwin@fake-email.com',	'Subject: RETURNED Test backup of initiator (#508) to AS - Service'),
+(2,	508,	NULL,	1697554097,	'Recipient(s): Tracy.O\'Hane0@fake-email.com, tester.tester@fake-email.com, Rhona.Goodwin@fake-email.com',	'Subject: RETURNED Test backup of initiator (#508) to AS - Service'),
+(3,	502,	NULL,	1697554890,	'Recipient(s): Linsey.Hackett@fake-email.com, tester.tester@fake-email.com, Rhona.Goodwin@fake-email.com',	'Subject: RETURNED This is a test of the mass import (#502) to AS - Service');
 
 DROP TABLE IF EXISTS `events`;
 CREATE TABLE `events` (
@@ -7024,7 +7113,10 @@ INSERT INTO `indicators` (`indicatorID`, `name`, `format`, `description`, `defau
 (7,	'Radio',	'radio\nA\nB\nC',	'',	'',	3,	'form_5ea07',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-09-07 15:18:45',	0,	0),
 (8,	'Assigned Person',	'orgchart_employee',	'',	'',	NULL,	'form_5ea07',	NULL,	NULL,	NULL,	NULL,	1,	0,	'2023-09-07 18:07:55',	0,	0),
 (9,	'Assigned Group',	'orgchart_group',	'',	'',	NULL,	'form_5ea07',	NULL,	NULL,	NULL,	NULL,	1,	0,	'2023-09-07 22:43:06',	0,	0),
-(10,	'Assigned Person 2',	'orgchart_employee',	'',	'',	8,	'form_5ea07',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-09-21 23:30:32',	0,	0);
+(10,	'Assigned Person 2',	'orgchart_employee',	'',	'',	8,	'form_5ea07',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-09-21 23:30:32',	0,	0),
+(11,	'single line text',	'text',	'',	'',	NULL,	'form_ce46b',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-10-16 17:07:09',	0,	0),
+(12,	'Single line text',	'text',	'',	'',	NULL,	'form_2d609',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-10-17 14:48:05',	0,	0),
+(13,	'Single line text',	'text',	'',	'',	NULL,	'form_a9b9f',	NULL,	NULL,	NULL,	NULL,	0,	0,	'2023-10-17 14:59:56',	0,	0);
 
 DROP TABLE IF EXISTS `indicator_mask`;
 CREATE TABLE `indicator_mask` (
@@ -7586,13 +7678,13 @@ INSERT INTO `records` (`recordID`, `date`, `serviceID`, `userID`, `title`, `prio
 (499,	1694021485,	0,	'tester',	'This is a test of the mass import',	0,	'Submitted',	1694021503,	0,	0,	1),
 (500,	1694021485,	0,	'tester',	'This is a test of the mass import',	0,	'Submitted',	1694021503,	0,	0,	1),
 (501,	1694021485,	0,	'tester',	'This is a test of the mass import',	0,	'Submitted',	1694021503,	0,	0,	1),
-(502,	1694021485,	0,	'tester',	'This is a test of the mass import',	0,	'Submitted',	1694021503,	0,	0,	1),
+(502,	1694021485,	201,	'VTRXVPMADELAINE',	'This is a test of the mass import',	0,	'Submitted',	1697554909,	0,	0,	1),
 (503,	1694021485,	0,	'tester',	'Tester is backup of person designated',	0,	'Approved',	1694021503,	0,	0,	1),
 (504,	1694021485,	0,	'VTRPAZMICKIE0',	'Tester is backup of initiator',	0,	'Approved',	1694021504,	0,	0,	1),
 (505,	1694021485,	0,	'VTRGBKJEANNINE',	'Requestor is not tester',	0,	'Submitted',	1694021504,	0,	0,	1),
 (506,	1694021485,	0,	'tester',	'This is a test of the mass import',	0,	'Note',	1694021504,	0,	0,	1),
 (507,	1695395480,	15,	'tester',	'Complex',	0,	'Submitted',	1695395485,	0,	0,	1),
-(508,	1697229337,	201,	'VTRPAZMICKIE0',	'Test backup of initiator',	0,	'Submitted',	1697229406,	0,	0,	1);
+(508,	1697229337,	201,	'VTRPAZMICKIE0',	'Test backup of initiator',	0,	'Submitted',	1697554108,	0,	0,	1);
 
 DROP TABLE IF EXISTS `records_dependencies`;
 CREATE TABLE `records_dependencies` (
@@ -10089,7 +10181,8 @@ INSERT INTO `records_dependencies` (`recordID`, `dependencyID`, `filled`, `time`
 (502,	-3,	0,	NULL),
 (502,	-2,	0,	1694021503),
 (502,	-1,	0,	NULL),
-(502,	5,	1,	1694021503),
+(502,	1,	0,	1697554909),
+(502,	5,	1,	1697554909),
 (502,	9,	0,	NULL),
 (503,	-3,	0,	NULL),
 (503,	-2,	0,	1694021503),
@@ -10116,11 +10209,11 @@ INSERT INTO `records_dependencies` (`recordID`, `dependencyID`, `filled`, `time`
 (507,	-1,	0,	1695395485),
 (507,	5,	1,	1695395485),
 (507,	9,	0,	1695395485),
-(508,	-3,	0,	1697229406),
-(508,	-2,	0,	1697229406),
-(508,	-1,	0,	1697229406),
-(508,	5,	1,	1697229406),
-(508,	9,	0,	1697229406);
+(508,	-3,	0,	1697554015),
+(508,	-2,	0,	1697554108),
+(508,	-1,	0,	1697554015),
+(508,	5,	1,	1697554108),
+(508,	9,	0,	1697554015);
 
 DROP TABLE IF EXISTS `records_step_fulfillment`;
 CREATE TABLE `records_step_fulfillment` (
@@ -10136,8 +10229,10 @@ INSERT INTO `records_step_fulfillment` (`recordID`, `stepID`, `fulfillmentTime`)
 (8,	1,	1694126647),
 (8,	2,	1694126651),
 (8,	3,	1694126654),
+(502,	7,	1697554890),
 (504,	1,	1694118917),
-(504,	2,	1694118920);
+(504,	2,	1694118920),
+(508,	5,	1697554097);
 
 DROP TABLE IF EXISTS `records_workflow_state`;
 CREATE TABLE `records_workflow_state` (
@@ -10648,13 +10743,13 @@ INSERT INTO `records_workflow_state` (`recordID`, `stepID`, `blockingStepID`, `l
 (499,	1,	0,	'2023-09-06 17:31:43',	0),
 (500,	1,	0,	'2023-09-06 17:31:43',	0),
 (501,	1,	0,	'2023-09-06 17:31:43',	0),
-(502,	1,	0,	'2023-09-06 17:31:43',	0),
+(502,	7,	0,	'2023-10-17 15:01:49',	0),
 (503,	1,	0,	'2023-09-06 17:31:43',	0),
 (504,	3,	0,	'2023-10-05 20:03:27',	0),
 (505,	3,	0,	'2023-10-05 20:03:19',	0),
 (506,	3,	0,	'2023-10-05 20:03:08',	0),
 (507,	3,	0,	'2023-10-13 21:27:15',	0),
-(508,	5,	0,	'2023-10-13 20:36:58',	0);
+(508,	5,	0,	'2023-10-17 14:48:28',	0);
 
 DROP TABLE IF EXISTS `route_events`;
 CREATE TABLE `route_events` (
@@ -10804,7 +10899,7 @@ INSERT INTO `settings` (`setting`, `data`) VALUES
 ('national_linkedSubordinateList',	''),
 ('orgchartImportTags',	'{\"0\":\"Academy_Demo1\"}'),
 ('requestLabel',	'Request'),
-('sitemap_json',	'{\"buttons\":[]}'),
+('sitemap_json',	'{\"buttons\":[{\"id\":\"akIyd\",\"title\":\"Test1\",\"description\":\"\",\"target\":\"https://localhost/LEAF_Request_Portal/?a=reports&v=3&query=N4IgLgpgTgtgziAXAbVASwCZPGsAbCEAGhAHsAHaAQzFKmwBkBJAaQFFiQYaBjAC2wAqQZwDmNQohABBAHIAREAF8i6LFIwQCkLCQrVa9KQF5O3MPyQAGEuMjY5ipQF0SAK1JoAdghQg40ABuaDyErv50YEjAKiB4aDC4SACMVmkk8YlgAPIAZrkBUYhWSkA&indicators=NobwRAlgdgJhDGBDALgewE4EkAiYBcYyEyANgKZgA0YUiAthQVWAM4bL4AMAvgLpA%3D%3D%3D\",\"color\":\"#ffffff\",\"fontColor\":\"#000000\",\"icon\":\"\",\"order\":0},{\"id\":\"nxAM6\",\"title\":\"Test2\",\"description\":\"\",\"target\":\"https://localhost/LEAF_Request_Portal/open.php?report=32wmV\",\"color\":\"#ffffff\",\"fontColor\":\"#000000\",\"icon\":\"\",\"order\":1}]}'),
 ('siteType',	'standard'),
 ('subHeading',	''),
 ('timeZone',	'America/New_York'),
@@ -10822,7 +10917,8 @@ CREATE TABLE `short_links` (
 
 INSERT INTO `short_links` (`shortID`, `type`, `hash`, `data`) VALUES
 (1,	'formQuery',	'a8fa7898f78bcc63e1128f01f03c192ca8abc8e4407f21cba7a145e7589cd4d2',	'{\"terms\":[{\"id\":\"title\",\"operator\":\"LIKE\",\"match\":\"**\",\"gate\":\"AND\"},{\"id\":\"deleted\",\"operator\":\"=\",\"match\":0,\"gate\":\"AND\"}],\"joins\":[\"service\"],\"sort\":{},\"limit\":10000,\"limitOffset\":0}'),
-(2,	'formQuery',	'5a34bd467219f924b12b834e1cba97c4355f5cda88a91adac14083abeb5ba396',	'{\"terms\":[{\"id\":\"stepID\",\"operator\":\"=\",\"match\":\"submitted\",\"gate\":\"AND\"},{\"id\":\"deleted\",\"operator\":\"=\",\"match\":0,\"gate\":\"AND\"}],\"joins\":[\"service\"],\"sort\":{},\"limit\":10000,\"limitOffset\":0}');
+(2,	'formQuery',	'5a34bd467219f924b12b834e1cba97c4355f5cda88a91adac14083abeb5ba396',	'{\"terms\":[{\"id\":\"stepID\",\"operator\":\"=\",\"match\":\"submitted\",\"gate\":\"AND\"},{\"id\":\"deleted\",\"operator\":\"=\",\"match\":0,\"gate\":\"AND\"}],\"joins\":[\"service\"],\"sort\":{},\"limit\":10000,\"limitOffset\":0}'),
+(3,	'report',	'7e18314398b0b8b385c6a136deb9ed7929da838f088959c726dc06cf63b20134',	'/?a=reports&v=3&query=N4IgLgpgTgtgziAXAbVASwCZPGsAbCEAGhAHsAHaAQzFKmwBkBJAaQFFiQYaBjAC2wAqQZwDmNQohABBAHIAREAF8i6LFIwQCkLCQrVa9KQF5O3MPyQAGEuMjY5ipQF0SAK1JoAdghQg40ABuaDyErv50YEjAKiB4aDC4SACMVmkk8YlgAPIAZrkBUYhWSkA&indicators=NobwRAlgdgJhDGBDALgewE4EkAiYBcYyEyANgKZgA0YUiAthQVWAM4bL4AMAvgLpA%3D%3D%3D');
 
 DROP TABLE IF EXISTS `signatures`;
 CREATE TABLE `signatures` (
@@ -10859,6 +10955,7 @@ INSERT INTO `step_dependencies` (`stepID`, `dependencyID`) VALUES
 (-3,	-1),
 (-2,	-1),
 (1,	-1),
+(7,	1),
 (1,	9),
 (2,	9);
 
@@ -10982,7 +11079,8 @@ INSERT INTO `workflows` (`workflowID`, `initialStepID`, `description`) VALUES
 (-2,	-4,	'Leaf Developer Console'),
 (-1,	-3,	'LEAF Secure Certification'),
 (1,	1,	'General Workflow'),
-(2,	5,	'Test Requestor Followup');
+(2,	5,	'Test Requestor Followup'),
+(3,	7,	'Service Chief');
 
 DROP TABLE IF EXISTS `workflow_routes`;
 CREATE TABLE `workflow_routes` (
@@ -11012,7 +11110,9 @@ INSERT INTO `workflow_routes` (`workflowID`, `stepID`, `nextStepID`, `actionType
 (1,	3,	3,	'Note',	''),
 (1,	4,	0,	'approve',	''),
 (2,	5,	0,	'approve',	''),
-(2,	5,	0,	'sendback',	'{\"required\":false}');
+(2,	5,	0,	'sendback',	'{\"required\":false}'),
+(3,	7,	0,	'approve',	''),
+(3,	7,	0,	'sendback',	'{\"required\":false}');
 
 DROP TABLE IF EXISTS `workflow_steps`;
 CREATE TABLE `workflow_steps` (
@@ -11042,4 +11142,5 @@ INSERT INTO `workflow_steps` (`workflowID`, `stepID`, `stepTitle`, `stepBgColor`
 (1,	2,	'Step 2',	'#fffdcd',	'black',	'1px solid black',	'',	779,	197,	NULL,	NULL,	NULL,	NULL),
 (1,	3,	'Requestor Followup',	'#fffdcd',	'black',	'1px solid black',	'',	368,	275,	NULL,	NULL,	NULL,	NULL),
 (1,	4,	'Group designated step',	'#fffdcd',	'black',	'1px solid black',	'',	723,	311,	NULL,	9,	NULL,	NULL),
-(2,	5,	'Followup',	'#fffdcd',	'black',	'1px solid black',	'',	533,	134,	NULL,	NULL,	NULL,	NULL);
+(2,	5,	'Followup',	'#fffdcd',	'black',	'1px solid black',	'',	533,	134,	NULL,	NULL,	NULL,	NULL),
+(3,	7,	'Service Chief',	'#fffdcd',	'black',	'1px solid black',	'',	625,	135,	NULL,	NULL,	NULL,	NULL);

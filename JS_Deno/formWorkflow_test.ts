@@ -10,8 +10,17 @@ Deno.test("formWorkflow: currentStep person designated AND group requirements", 
     let res = await fetch(rootURL + `api/formWorkflow/484/currentStep`);
     let data = await res.json()
 
-    assertEquals(data[9].description, 'Group A');
-    assertEquals(data[-1].description, 'Step 1 (Omar Marvin)');
+    let got = data[9].description;
+    let want = 'Group A';
+    assertEquals(data[9].description, want, 
+        `description = ${got}, want = ${want}`);
 
-    assertExists(!data[9].approverName); // approverName should not exist for depID 9
+    got = data[-1].description;
+    want = 'Step 1 (Omar Marvin)';
+    assertEquals(got, want, 
+        `description = ${got}, want = ${want}`);
+
+    got = data[9].approverName;
+    assertExists(!got, 
+        `approver exists = ${!got}, want = false`); // approverName should not exist for depID 9
 });

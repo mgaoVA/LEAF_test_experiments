@@ -11,26 +11,26 @@ Deno.test("form: version", async () => {
     let res = await fetch(rootURL + `api/form/version`);
     let data = await res.json()
 
-    assertEquals(data, "1");
+    assertEquals(data, "1", `form version = ${data}, want = 1`);
 });
 
 Deno.test("form: query homepage", async () => {
     let res = await fetch(rootURL + `api/form/query?q={"terms":[{"id":"title","operator":"LIKE","match":"***","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service","status","categoryName"],"sort":{"column":"date","direction":"DESC"},"limit":50}`);
     let data = await res.json()
 
-    assertEquals(data[504].recordID, 504);
+    assertExists(data[460].recordID, `RecordID 460 should be readable`)
 });
 
 Deno.test("form: non-admin query for actionable records", async () => {
     let res = await fetch(rootURL + `api/form/query?q={"terms":[{"id":"stepID","operator":"=","match":"actionable","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service"],"sort":{},"limit":1000,"limitOffset":0}&x-filterData=recordID,title&masquerade=nonAdmin`);
     let data = await res.json()
 
-    assertExists(data[503]); // tester is backup of person designated
-    assertExists(data[504]); // tester is backup of initiator
-    assertExists(!data[505]); // tester is not the requestor
+    assertExists(data[503], `Should be readable because tester is backup of person designated`);
+    assertExists(data[504], `Should be readable because tester is backup of initiator`);
+    assertExists(!data[505], `Should not be readable because tester is not the requestor`);
 });
 
-Deno.test("form: edit record datafield", async () => {
+Deno.test("form: admin edit record datafield", async () => {
     let formData = new FormData();
     formData.append('CSRFToken', CSRFToken);
     formData.append('3', '12345');
@@ -41,7 +41,7 @@ Deno.test("form: edit record datafield", async () => {
     });
     let data = await res.json()
 
-    assertEquals(data, "1");
+    assertEquals(data, "1", `admin edit = ${data}, want = 1`);
 });
 
 Deno.test("form: non-admin cannot edit record datafield", async () => {
@@ -55,5 +55,5 @@ Deno.test("form: non-admin cannot edit record datafield", async () => {
     });
     let data = await res.json()
 
-    assertEquals(data, "0");
+    assertEquals(data, "0", `non-admin edit = ${data}, want = 0`);
 });

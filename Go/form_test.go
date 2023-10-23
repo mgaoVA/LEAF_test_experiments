@@ -14,7 +14,7 @@ func TestForm_Version(t *testing.T) {
 	want := `"1"`
 
 	if !cmp.Equal(got, want) {
-		t.Errorf("form version got = %v, want = %v", got, want)
+		t.Errorf("form version = %v, want = %v", got, want)
 	}
 }
 
