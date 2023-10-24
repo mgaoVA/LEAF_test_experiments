@@ -2,7 +2,7 @@
 
 This test suite should exercise access rules, data accuracy, and measure performance within hotpaths for the LEAF API.
 
-This leverages an existing [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
+This leverages an existing [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
 
 TODO:
 1. Setup and configuration of the Test DB needs to be automated
@@ -11,7 +11,8 @@ TODO:
 # Docker Environment
 
 ## Prerequisites
-- Install [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
+- Install [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
+- The LEAF docker development environment must be running
 - Map test DB into development environment (this needs to be automated)
   1. Import test databases from ../Go/database/*.sql
   2. In the national_leaf_launchpad database, update fields for portal_database and orgchart_database to point to the imported test databases

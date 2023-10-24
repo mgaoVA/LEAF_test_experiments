@@ -2,7 +2,7 @@
 
 This test suite should exercise access rules, data accuracy, and measure performance within hotpaths for the LEAF API.
 
-This leverages an existing [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
+This leverages an existing [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
 
 TODO:
 1. Need a more streamlined way to visualize results from benchmarks between different releases
@@ -10,8 +10,8 @@ TODO:
 # Docker Environment
 
 ## Prerequisites
-- Install [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
-- The LEAF docker development enviornment must be running
+- Install [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
+- The LEAF docker development environment must be running
   - If the test database's username/password in is different than tester/tester, update dbsetup_test.go
 
 ## Run
