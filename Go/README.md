@@ -15,6 +15,7 @@ TODO:
   - If the test database's username/password in is different than tester/tester, update dbsetup_test.go
 
 ## Run
+Navigate to the docker directory, then run:
 ```
 docker compose up --remove-orphans
 ```

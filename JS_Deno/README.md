@@ -18,6 +18,7 @@ TODO:
   3. After running the test, restore the original fields in #2
 
 ## Run
+Navigate to the docker directory, then run:
 ```
 docker compose up --remove-orphans
 ```
