@@ -13,7 +13,7 @@ TODO:
 ## Prerequisites
 - Install [LEAF docker development enviornment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
 - Map test DB into development environment (this needs to be automated)
-  1. Import test databases from ../*.sql
+  1. Import test databases from ../Go/database/*.sql
   2. In the national_leaf_launchpad database, update fields for portal_database and orgchart_database to point to the imported test databases
   3. After running the test, restore the original fields in #2
 

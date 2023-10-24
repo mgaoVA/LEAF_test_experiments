@@ -10,6 +10,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var rootURL = "https://localhost/LEAF_Request_Portal/"
@@ -28,6 +30,7 @@ var client = &http.Client{
 
 // TestMain performs initial setup and logs into the dev environment.
 // In dev, the current username is set via REMOTE_USER docker environment
+// Tests must not trigger Fatal. See teardownTestDB()
 func TestMain(m *testing.M) {
 
 	req, _ := http.NewRequest("GET", rootURL, nil)
@@ -47,5 +50,11 @@ func TestMain(m *testing.M) {
 	endIdx := strings.Index(body[startIdx:], "';")
 	csrfToken = body[startIdx : startIdx+endIdx]
 
-	os.Exit(m.Run())
+	setupTestDB()
+
+	code := m.Run()
+
+	teardownTestDB()
+
+	os.Exit(code)
 }

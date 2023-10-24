@@ -17,7 +17,7 @@ func getFormWorkflow(url string) FormWorkflowResponse {
 	err := json.Unmarshal(b, &m)
 	if err != nil {
 		log.Printf("JSON parsing error, couldn't parse: %v", string(b))
-		log.Fatalf("JSON parsing error: %v", err.Error())
+		log.Printf("JSON parsing error: %v", err.Error())
 	}
 	return m
 }
