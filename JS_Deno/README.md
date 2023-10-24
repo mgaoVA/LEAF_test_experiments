@@ -8,8 +8,6 @@ TODO:
 1. Setup and configuration of the Test DB needs to be automated
 1. Need a more streamlined way to visualize results from benchmarks between different releases
 
-# Docker Environment
-
 ## Prerequisites
 - Install [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
 - The LEAF docker development environment must be running
@@ -17,6 +15,8 @@ TODO:
   1. Import test databases from ../Go/database/*.sql
   2. In the national_leaf_launchpad database, update fields for portal_database and orgchart_database to point to the imported test databases
   3. After running the test, restore the original fields in #2
+
+# Docker Environment
 
 ## Run
 Navigate to the docker directory, then run:

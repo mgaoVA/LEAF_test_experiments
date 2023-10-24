@@ -7,12 +7,12 @@ This leverages an existing [LEAF docker development environment](https://github.
 TODO:
 1. Need a more streamlined way to visualize results from benchmarks between different releases
 
-# Docker Environment
-
 ## Prerequisites
 - Install [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md)
 - The LEAF docker development environment must be running
   - If the test database's username/password in is different than tester/tester, update dbsetup_test.go
+
+# Docker Environment
 
 ## Run
 Navigate to the docker directory, then run:
