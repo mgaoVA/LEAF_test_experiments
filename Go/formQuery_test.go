@@ -45,4 +45,8 @@ func TestForm_NonadminQueryActionable(t *testing.T) {
 	if _, exists := res[505]; exists {
 		t.Errorf("Record 505 should not be readable because tester is not the requestor")
 	}
+
+	if _, exists := res[500]; !exists {
+		t.Errorf("Record 500 should be readable because tester is the designated reviewer")
+	}
 }
