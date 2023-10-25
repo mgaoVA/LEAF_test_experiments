@@ -28,6 +28,7 @@ Deno.test("form: non-admin query for actionable records", async () => {
     assertExists(data[503], `Record 503 should be readable because tester is backup of person designated`);
     assertExists(data[504], `Record 504 should be readable because tester is backup of initiator`);
     assertExists(!data[505], `Record 505 should not be readable because tester is not the requestor`);
+    assertExists(data[500], `Record 500 should be readable because tester is the designated reviewer`);
 });
 
 Deno.test("form: admin edit record datafield", async () => {
