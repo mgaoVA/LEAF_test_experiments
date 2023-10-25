@@ -1,8 +1,8 @@
 # LEAF API Testing
 
-This test suite should exercise access rules, data accuracy, and measure performance within hotpaths for the LEAF API.
+This test suite should exercise access rules, data accuracy, and measure performance within hotpaths for the LEAF API. ***Currently only compatible with Sprint-60-c2 and newer, due to recent containerization changes.***
 
-This leverages an existing [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database. 
+This leverages an existing [LEAF docker development environment](https://github.com/department-of-veterans-affairs/LEAF/blob/master/docs/InstallationConfiguration.md), and temporarily uses a predefined test database.
 
 TODO:
 1. Need a more streamlined way to visualize results from benchmarks between different releases
