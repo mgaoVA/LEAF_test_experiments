@@ -9,7 +9,7 @@ import (
 )
 
 func TestForm_Version(t *testing.T) {
-	got := httpGet(rootURL + "api/form/version")
+	got, _ := httpGet(rootURL + "api/form/version")
 	want := `"1"`
 
 	if !cmp.Equal(got, want) {
@@ -44,5 +44,18 @@ func TestForm_NonadminCannotEditData(t *testing.T) {
 
 	if !cmp.Equal(got, want) {
 		t.Errorf("Non-admin got = %v, want = %v", got, want)
+	}
+}
+
+func TestForm_WorkflowIndicatorAssigned(t *testing.T) {
+	got, res := httpGet(rootURL + "api/form/508/workflow/indicator/assigned")
+
+	if !cmp.Equal(res.StatusCode, 200) {
+		t.Errorf("./api/form/508/workflow/indicator/assigned Status Code = %v, want = %v", res.StatusCode, 200)
+	}
+
+	want := `[]`
+	if !cmp.Equal(got, want) {
+		t.Errorf("./api/form/508/workflow/indicator/assigned = %v, want = %v", got, want)
 	}
 }
