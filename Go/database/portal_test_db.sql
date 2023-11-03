@@ -6777,7 +6777,7 @@ INSERT INTO `records` (`recordID`, `date`, `serviceID`, `userID`, `title`, `prio
 (529,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (530,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (531,	1699044419,	0,	'tester',	'Tester is a member of the assigned group',	0,	'Submitted',	1699044434,	0,	0,	1),
-(532,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
+(532,	1699044419,	0,	'tester',	'Tester is not a member of the assigned group',	0,	'Submitted',	1699044434,	0,	0,	1),
 (533,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (534,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (535,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
