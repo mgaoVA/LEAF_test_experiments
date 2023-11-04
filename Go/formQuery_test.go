@@ -36,6 +36,18 @@ func TestFormQuery_HomepageQuery(t *testing.T) {
 	}
 }
 
+func TestFormQuery_NonadminQuery(t *testing.T) {
+	res, _ := getFormQuery(rootURL + `api/form/query?q={"terms":[{"id":"stepID","operator":"!=","match":"resolved","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service"],"sort":{},"limit":1000,"limitOffset":0}&x-filterData=recordID,title&masquerade=nonAdmin`)
+
+	if _, exists := res[958]; exists {
+		t.Errorf("Record 958 should not be readable")
+	}
+
+	if _, exists := res[530]; !exists {
+		t.Errorf("Record 530 should be readable")
+	}
+}
+
 func TestFormQuery_NonadminQueryActionable(t *testing.T) {
 	res, _ := getFormQuery(rootURL + `api/form/query?q={"terms":[{"id":"stepID","operator":"=","match":"actionable","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service"],"sort":{},"limit":1000,"limitOffset":0}&x-filterData=recordID,title&masquerade=nonAdmin`)
 

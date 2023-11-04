@@ -47,6 +47,10 @@ CREATE TABLE `action_history` (
   CONSTRAINT `fk_records_action_history_deletion` FOREIGN KEY (`recordID`) REFERENCES `records` (`recordID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `action_history` (`actionID`, `recordID`, `userID`, `stepID`, `dependencyID`, `actionType`, `actionTypeID`, `time`, `comment`) VALUES
+(1,	958,	'tester',	0,	0,	'changeInitiator',	8,	1699055105,	'Initiator changed to Ollie Flatley'),
+(2,	530,	'tester',	0,	0,	'changeInitiator',	8,	1699056198,	'Initiator changed to Alysa Dare'),
+(3,	530,	'tester',	0,	0,	'move',	8,	1699056206,	'Moved to Requestor Followup step');
 
 DROP TABLE IF EXISTS `action_types`;
 CREATE TABLE `action_types` (
@@ -3637,7 +3641,7 @@ INSERT INTO `data` (`recordID`, `indicatorID`, `series`, `data`, `timestamp`, `u
 (504,	5,	1,	'41465',	1694021485,	'tester'),
 (504,	8,	1,	'300',	1695331226,	'tester'),
 (504,	10,	1,	'60',	1695339088,	'tester'),
-(505,	3,	1,	'12345',	1698182153,	'tester'),
+(505,	3,	1,	'12345',	1699056153,	'tester'),
 (505,	4,	1,	'',	1697328866,	'tester'),
 (505,	5,	1,	'87079',	1697328866,	'tester'),
 (505,	6,	1,	'',	1697328866,	'tester'),
@@ -3736,7 +3740,7 @@ INSERT INTO `data` (`recordID`, `indicatorID`, `series`, `data`, `timestamp`, `u
 (530,	3,	1,	'27176',	1699044419,	'tester'),
 (530,	4,	1,	'64506',	1699044419,	'tester'),
 (530,	5,	1,	'17093',	1699044419,	'tester'),
-(530,	9,	1,	'37',	1699044483,	'tester'),
+(530,	9,	1,	'205',	1699056186,	'tester'),
 (531,	3,	1,	'53314',	1699044419,	'tester'),
 (531,	4,	1,	'79153',	1699044419,	'tester'),
 (531,	5,	1,	'48272',	1699044419,	'tester'),
@@ -5485,6 +5489,8 @@ CREATE TABLE `data_history` (
   CONSTRAINT `fk_records_data_history_deletion` FOREIGN KEY (`recordID`) REFERENCES `records` (`recordID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `data_history` (`recordID`, `indicatorID`, `series`, `data`, `timestamp`, `userID`) VALUES
+(530,	9,	1,	'205',	1699056186,	'tester');
 
 DROP TABLE IF EXISTS `data_log_items`;
 CREATE TABLE `data_log_items` (
@@ -6775,7 +6781,7 @@ INSERT INTO `records` (`recordID`, `date`, `serviceID`, `userID`, `title`, `prio
 (527,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (528,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
 (529,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
-(530,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
+(530,	1699044419,	0,	'VTRYYXCANDIDA',	'tester is member of assigned group',	0,	'Submitted',	1699044434,	0,	0,	1),
 (531,	1699044419,	0,	'tester',	'Tester is a member of the assigned group',	0,	'Submitted',	1699044434,	0,	0,	1),
 (532,	1699044419,	0,	'tester',	'Tester is not a member of the assigned group',	0,	'Submitted',	1699044434,	0,	0,	1),
 (533,	1699044419,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044434,	0,	0,	1),
@@ -7203,7 +7209,7 @@ INSERT INTO `records` (`recordID`, `date`, `serviceID`, `userID`, `title`, `prio
 (955,	1699044434,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044448,	0,	0,	1),
 (956,	1699044434,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044448,	0,	0,	1),
 (957,	1699044434,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044448,	0,	0,	1),
-(958,	1699044434,	0,	'tester',	'Available for test case',	0,	'Submitted',	1699044448,	0,	0,	1);
+(958,	1699044434,	0,	'VTRNCOJANINA',	'Tester should not have access in non-admin mode',	0,	'Submitted',	1699044448,	0,	0,	1);
 
 DROP TABLE IF EXISTS `records_dependencies`;
 CREATE TABLE `records_dependencies` (
@@ -12542,7 +12548,7 @@ INSERT INTO `records_workflow_state` (`recordID`, `stepID`, `blockingStepID`, `l
 (527,	4,	0,	'2023-11-03 20:48:29',	0),
 (528,	4,	0,	'2023-11-03 20:48:29',	0),
 (529,	4,	0,	'2023-11-03 20:48:29',	0),
-(530,	4,	0,	'2023-11-03 20:48:29',	0),
+(530,	3,	0,	'2023-11-04 00:03:26',	0),
 (531,	4,	0,	'2023-11-03 20:48:29',	0),
 (532,	4,	0,	'2023-11-03 20:48:29',	0),
 (533,	4,	0,	'2023-11-03 20:48:29',	0),
