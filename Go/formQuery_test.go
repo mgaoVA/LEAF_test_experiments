@@ -96,7 +96,7 @@ func TestFormQuery_FulltextSearch_ApplePear_RequireOrange(t *testing.T) {
 	}
 
 	if _, exists := res[498]; exists {
-		t.Errorf(`Record 498 should not exist because data fields does not contain the word "orange"`)
+		t.Errorf(`Record 498 should not exist because data fields do not contain the word "orange"`)
 	}
 }
 
@@ -104,7 +104,7 @@ func TestFormQuery_FulltextSearch_ApplePearNoOrange(t *testing.T) {
 	res, _ := getFormQuery(rootURL + `api/form/query?q={"terms":[{"id":"data","indicatorID":"3","operator":"MATCH","match":"apple pear %2Dorange","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service","status","categoryName"],"sort":{"column":"date","direction":"DESC"},"limit":50}`)
 
 	if _, exists := res[499]; exists {
-		t.Errorf(`Record 499 should not exist because data fields contains the word "orange". want = no orange`)
+		t.Errorf(`Record 499 should not exist because data fields contain the word "orange". want = no orange`)
 	}
 
 	if _, exists := res[498]; !exists {
