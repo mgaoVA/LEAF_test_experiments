@@ -23,7 +23,7 @@ func TestFormQuery_HomepageQuery(t *testing.T) {
 
 	// get first key
 	var key int
-	for k, _ := range res {
+	for k := range res {
 		key = k
 		break
 	}
@@ -109,5 +109,13 @@ func TestFormQuery_FulltextSearch_ApplePearNoOrange(t *testing.T) {
 
 	if _, exists := res[498]; !exists {
 		t.Errorf(`Record 498 should exist because data fields do not contain the word "orange"`)
+	}
+}
+
+func TestFormQuery_RecordIdAndFulltext(t *testing.T) {
+	res, _ := getFormQuery(rootURL + `api/form/query?q={"terms":[{"id":"recordID","operator":"=","match":"499","gate":"AND"},{"id":"data","indicatorID":"0","operator":"MATCH ALL","match":"apple","gate":"AND"},{"id":"deleted","operator":"=","match":0,"gate":"AND"}],"joins":["service","status","categoryName"],"sort":{"column":"date","direction":"DESC"},"limit":50}`)
+
+	if _, exists := res[499]; !exists {
+		t.Errorf(`Record 499 should exist because the data fields contain the word "apple". want = recordID IS 499 AND data contains apple`)
 	}
 }
